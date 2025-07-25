@@ -8,27 +8,85 @@ generator client {
 }
 
 model User {
-  id        String   @id @default(cuid())
-  createdAt DateTime @default(now())
-  email     String   @unique
-  password  String
-  name      String?
-  role      Role     @default(USER)
-  posts     Post[]
+  id       String  @id @default(cuid()) @map("id")
+  email    String  @unique @map("email")
+  password String  @map("password")
+  name     String? @map("name")
+
+  topics   Topic[]         @relation("UserTopics")
+  notes    Note[]          @relation("UserNotes")
+  progress TopicProgress[]
+  tags     Tag[]
+  role     Role            @default(USER)
 
   @@map("user")
 }
 
-model Post {
-  id        Int      @id @default(autoincrement())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  published Boolean  @default(false)
-  title     String   @db.VarChar(255)
-  author    User?    @relation(fields: [authorId], references: [id])
-  authorId  String?  @map("author_id")
+model Topic {
+  id          String  @id @default(cuid()) @map("id")
+  title       String  @map("title")
+  description String? @map("description")
 
-  @@map("post")
+  user   User   @relation("UserTopics", fields: [userId], references: [id])
+  userId String @map("user_id")
+
+  notes     Note[]
+  checklist ChecklistItem[]
+  progress  TopicProgress[]
+
+  @@map("topic")
+}
+
+model Note {
+  id        String   @id @default(cuid()) @map("id")
+  content   String   @map("content")
+  createdAt DateTime @default(now()) @map("created_at")
+
+  topic   Topic  @relation(fields: [topicId], references: [id])
+  topicId String @map("topic_id")
+
+  user   User   @relation("UserNotes", fields: [userId], references: [id])
+  userId String @map("user_id")
+
+  tags Tag[] @relation("NoteTags")
+
+  @@map("note")
+}
+
+model Tag {
+  id     String @id @default(cuid()) @map("id")
+  name   String @map("name")
+  user   User   @relation(fields: [userId], references: [id])
+  userId String @map("user_id")
+
+  notes Note[] @relation("NoteTags")
+  @@unique([userId, name])
+  @@map("tag")
+}
+
+model ChecklistItem {
+  id      String  @id @default(cuid()) @map("id")
+  content String  @map("content")
+  done    Boolean @default(false) @map("done")
+
+  topic   Topic  @relation(fields: [topicId], references: [id])
+  topicId String @map("topic_id")
+
+  @@map("checklist_item")
+}
+
+model TopicProgress {
+  id        String   @id @default(cuid()) @map("id")
+  percent   Int      @default(0) @map("percent")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  topic   Topic  @relation(fields: [topicId], references: [id])
+  topicId String @map("topic_id")
+
+  user   User   @relation(fields: [userId], references: [id])
+  userId String @map("user_id")
+
+  @@map("topic_progress")
 }
 
 enum Role {
