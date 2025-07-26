@@ -7,9 +7,10 @@ import { useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { toast } from 'sonner'
 
-import { Button } from '@/components/ui/Buttons/Button'
-import { Field } from '@/components/ui/Fields/Field'
 import { Heading } from '@/components/ui/Heading/Heading'
+import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
 
 import { IAuthForm } from '@/types/auth.type'
 
@@ -38,7 +39,7 @@ export function Auth() {
 				? toast.success('Successfully logged in!')
 				: toast.success('Successfully registered!')
 			reset()
-			push('/dashboard')
+			push('/')
 		},
 		onError(error: any) {
 			toast.error(error.response?.data?.message || 'Something wen wrong')
@@ -50,22 +51,39 @@ export function Auth() {
 	}
 	return (
 		<div className='flex justify-center items-center w-screen h-screen'>
-			<form onSubmit={handleSubmit(onSubmit)} className='w-1/4 rounded-xl'>
+			<form
+				onSubmit={handleSubmit(onSubmit)}
+				className='w-1/4 rounded-xl'
+			>
 				<Heading title='Auth' />
-				<Field
+				<Label
+					htmlFor='email'
+					className='mb-3'
+				>
+					Email
+				</Label>
+
+				<Input
+					className='mb-3'
 					id='email'
 					type='email'
 					placeholder='Enter email : '
-					label='Email'
 					error={errors.email?.message}
 					{...register('email', { required: 'Email is required!' })}
 				/>
 
-				<Field
+				<Label
+					htmlFor='email'
+					className='mb-3'
+				>
+					Password
+				</Label>
+
+				<Input
+					className='mb-4'
 					id='password'
 					type='password'
 					placeholder='Enter password: '
-					label='Email'
 					error={errors.password?.message}
 					{...register('password', { required: 'Password is required!' })}
 				/>
@@ -78,6 +96,7 @@ export function Auth() {
 					>
 						Login
 					</Button>
+
 					<Button
 						type='submit'
 						onClick={() => setLoginForm(false)}

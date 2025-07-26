@@ -1,5 +1,15 @@
-import Image from 'next/image'
+import type { Metadata } from 'next'
 
-export default function Home() {
-	return <div></div>
+import { Home } from '@/components/home/Home'
+
+export const metadata: Metadata = {
+	title: 'PageTitle'
+}
+
+export default function HomePage() {
+	return (
+		<div>
+			<Home />
+		</div>
+	)
 }

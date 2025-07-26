@@ -8,7 +8,7 @@ export async function middleware(req: NextRequest) {
 	const refreshToken = cookies.get(EnumTokens.REFRESH_TOKEN)?.value
 
 	if (isAuthPage && refreshToken) {
-		return NextResponse.redirect(new URL('/dashboard', url))
+		return NextResponse.redirect(new URL('/', url))
 	}
 
 	if (isAuthPage) {
@@ -23,5 +23,5 @@ export async function middleware(req: NextRequest) {
 }
 
 export const config = {
-	matcher: ['/dashboard/:path*', '/auth', '/auth/:path*']
+	matcher: [ '/','/dashboard/:path*', '/auth', '/auth/:path*']
 }
