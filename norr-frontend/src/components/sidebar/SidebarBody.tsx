@@ -1,10 +1,15 @@
 import clsx from 'clsx'
-import { Loader2 } from 'lucide-react'
+import { Edit, Loader2, Trash } from 'lucide-react'
+import Link from 'next/link'
 
+import { useModalStore } from '@/store/modal.store'
+
+import { useTopicProgres } from '@/hooks/topics/useTopicProgres'
+
+import { DeleteTopicAlert } from '../alert-dialog/DeleteTopicAlert'
 import { Progress } from '../ui/progress'
 
 import { SidebarProps } from './SideBar'
-import { useTopicProgres } from '@/hooks/topics/useTopicProgres'
 
 interface ISidebarBody
 	extends Pick<
@@ -21,10 +26,9 @@ export function SidebarBody({
 	onSelect,
 	collapsed
 }: ISidebarBody) {
-		const {progress , isLoading, error} = useTopicProgres(activeTopicId)
-		console.log(progress);
-		
-	
+	const { progress, isLoading, error } = useTopicProgres(activeTopicId)
+	const { openEditTopic } = useModalStore()
+
 	return (
 		<div className='flex-1 overflow-y-auto px-2 pb-2'>
 			{loading ? (
@@ -46,7 +50,9 @@ export function SidebarBody({
 						const isActive = t.id === activeTopicId
 						return (
 							<li key={t.id}>
-								<button
+								<div
+									role='button'
+									tabIndex={0}
 									onClick={() => onSelect(t.id)}
 									className={clsx(
 										'group w-full rounded-md px-2 py-2 text-left text-sm transition-colors',
@@ -58,18 +64,29 @@ export function SidebarBody({
 									{/* name */}
 									{!collapsed ? (
 										<div className='flex flex-col'>
-											<span className='truncate'>{t.title}</span>
-											{isActive && typeof progress === 'number' && (
-												<Progress
-													value={progress}
-													className='mt-1'
-												/>
-											)}
+											<Link href={`/topics/${t.id}`}>
+												<span className='truncate'>{t.title}</span>
+												{isActive && typeof progress === 'number' && (
+													<Progress
+														value={progress}
+														className='mt-1'
+													/>
+												)}
+											</Link>
+											<div className='flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity'>
+												<button
+													onClick={() => openEditTopic(t)}
+													className='p-1 hover:text-primary'
+												>
+													<Edit size={16} />
+												</button>
+												<DeleteTopicAlert topicId={t.id} />
+											</div>
 										</div>
 									) : (
 										<span className='block truncate'>{t.title[0]}</span>
 									)}
-								</button>
+								</div>
 							</li>
 						)
 					})}

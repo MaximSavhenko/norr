@@ -1,7 +1,7 @@
 'use client'
 
 import clsx from 'clsx'
-import { ChevronLeft, Loader2, Menu, Plus } from 'lucide-react'
+import { Menu } from 'lucide-react'
 import { useState } from 'react'
 
 import { SidebarBody } from './SidebarBody'

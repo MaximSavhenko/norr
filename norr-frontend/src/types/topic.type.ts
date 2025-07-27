@@ -6,5 +6,5 @@ export interface ITopicResponse extends IBase {
 }
 
 export type TypeTopicFormState = Partial<
-	Omit<ITopicResponse, 'id' | 'updatedAt'>
+	Omit<ITopicResponse, 'id' | 'updateAt'>
 >

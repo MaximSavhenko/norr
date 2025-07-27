@@ -5,8 +5,13 @@ import { axiosWithAuth } from '@/api/interceptors'
 class TopicsService {
 	private BASE_URL = 'user/topics'
 
+	async getTopicProgress(id: string) {
+		const response = await axiosWithAuth.get(`${this.BASE_URL}/progress/${id}`)
+		return response.data
+	}
+	
 	async getTopics() {
-		const response = await axiosWithAuth.get<ITopicResponse[]>(this.BASE_URL)    
+		const response = await axiosWithAuth.get<ITopicResponse[]>(this.BASE_URL)
 		return response
 	}
 
@@ -24,11 +29,6 @@ class TopicsService {
 		const response = await axiosWithAuth.delete(`${this.BASE_URL}/${id}`)
 		return response
 	}
-
-  async getTopicProgress(id: string) {
-    const response = await axiosWithAuth.get(`${this.BASE_URL}/progress/${id}`)
-		return response.data
-  }
 }
 
 export const topicService = new TopicsService()
