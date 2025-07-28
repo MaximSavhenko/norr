@@ -49,13 +49,16 @@ export function SidebarBody({
 					{topics.map(t => {
 						const isActive = t.id === activeTopicId
 						return (
-							<li key={t.id}>
+							<li
+								key={t.id}
+								className='mb-5'
+							>
 								<div
 									role='button'
 									tabIndex={0}
 									onClick={() => onSelect(t.id)}
 									className={clsx(
-										'group w-full rounded-md px-2 py-2 text-left text-sm transition-colors',
+										'group w-full rounded-md px-2 py-2 text-left text-sm transition-colors h-[72px]',
 										isActive
 											? 'bg-primary/10 text-primary'
 											: 'text-foreground/80 hover:bg-accent hover:text-foreground'
@@ -63,9 +66,9 @@ export function SidebarBody({
 								>
 									{/* name */}
 									{!collapsed ? (
-										<div className='flex flex-col'>
+										<div className='flex flex-col justify-between h-full'>
 											<Link href={`/topics/${t.id}`}>
-												<span className='truncate'>{t.title}</span>
+												<p className='truncate'>{t.title}</p>
 												{isActive && typeof progress === 'number' && (
 													<Progress
 														value={progress}
@@ -84,7 +87,14 @@ export function SidebarBody({
 											</div>
 										</div>
 									) : (
-										<span className='block truncate'>{t.title[0]}</span>
+										<span>
+											<Link
+												className='flex items-center justify-center h-full w-full  truncate'
+												href={`/topics/${t.id}`}
+											>
+												{t.title[0]}
+											</Link>
+										</span>
 									)}
 								</div>
 							</li>
