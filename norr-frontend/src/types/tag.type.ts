@@ -6,5 +6,10 @@ export interface ITagResponse extends IBase {
 }
 
 export type TypeTagFormState = Partial<
-	Omit<ITagResponse, 'id' | 'userId' | 'updatedAt' | 'createdAt'>
+	Omit<ITagResponse,  | 'userId' | 'updatedAt' | 'createdAt'>
 >
+
+export interface ITagUpdate {
+	name: string
+	id: string
+}

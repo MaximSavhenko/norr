@@ -1,8 +1,9 @@
-import { IsArray, IsOptional, IsString } from "class-validator";
+import { Prisma } from "@prisma/client";
+import { IsArray, IsJSON, IsObject, IsOptional, IsString } from "class-validator";
 
 export class CreateNoteDto {
-  @IsString()
-  content: string
+  @IsObject()
+  content: Prisma.InputJsonValue
 
   @IsString()
   topicId: string

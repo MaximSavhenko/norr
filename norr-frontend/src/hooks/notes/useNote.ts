@@ -1,17 +1,18 @@
-import { noteService, NoteService } from "@/services/notes.service"
-import { INoteResponse } from "@/types/note.type"
-import { useQuery } from "@tanstack/react-query"
+import { useQuery } from '@tanstack/react-query'
 
-export function useNote() {
+import { INoteResponse } from '@/types/note.type'
 
-    const {data, isLoading, error} = useQuery<{data: INoteResponse[]}>( {
-      queryKey: ['notes'],
-      queryFn: () => noteService.getNote()  
-    }) 
+import { noteService } from '@/services/notes.service'
 
-    return {
-      notes: data?.data ?? [],
-      isLoading,
-      error 
-    }
+export function useNote(topicId: string) {
+	const { data, isLoading, error } = useQuery<{ data: INoteResponse[] }>({
+		queryKey: ['notes', topicId],
+		queryFn: () => noteService.getNote()
+	})
+
+	return {
+		notes: data?.data ?? [],
+		isLoading,
+		error
+	}
 }

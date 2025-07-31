@@ -24,6 +24,9 @@ export class NotesService {
 	async getAll(userId: string) {
 		return this.prisma.note.findMany({
 			where: { userId },
+			orderBy: {
+				createdAt: 'asc'
+			},
 			include: { tags: true }
 		})
 	}
@@ -45,9 +48,10 @@ export class NotesService {
 			where: { id: noteId, userId },
 			data: {
 				content: updateNoteDto.content,
-				tags: updateNoteDto.tagIds
-					? { set: updateNoteDto.tagIds.map(id => ({ id })) }
-					: undefined
+				tags:
+					updateNoteDto.tagIds !== undefined
+						? { set: updateNoteDto.tagIds.map(id => ({ id })) }
+						: undefined
 			},
 			include: { tags: true }
 		})

@@ -1,18 +1,21 @@
+import { JSONContent } from '@tiptap/react'
 import { IBase } from './root.type'
+import { ITagResponse } from './tag.type'
 
 export interface INoteResponse extends IBase {
-	content: string
+	content: JSONContent
 	topicId: string
 	userId: string
-	tags: string[]
+	tags: ITagResponse[]
 }
 
 export interface INoteCreateData {
-	content: string
+	content: JSONContent
 	topicId: string
 	tagIds: string[]
 }
 
 export interface INoteUpdateData {
-	content: string
+	content: JSONContent,
+	tagIds: string[]
 }

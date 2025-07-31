@@ -5,13 +5,13 @@ import { INoteCreateData } from '@/types/note.type'
 import { noteService } from '@/services/notes.service'
 
 export function useCreateNote() {
-	const queryClietn = useQueryClient()
+	const queryClient = useQueryClient()
   
 	const { mutate: createNote , isPending , isSuccess } = useMutation({
 		mutationKey: ['create note'],
 		mutationFn: (data: INoteCreateData) => noteService.createNote(data),
 		onSuccess(_, data) {
-			void queryClietn.invalidateQueries({
+			void queryClient.invalidateQueries({
 				queryKey: ['notes' , data.topicId]
 			})
 		}

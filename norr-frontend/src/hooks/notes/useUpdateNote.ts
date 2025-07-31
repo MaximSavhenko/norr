@@ -4,7 +4,7 @@ import { INoteUpdateData } from '@/types/note.type'
 
 import { noteService } from '@/services/notes.service'
 
-export function useUpdateNote() {
+export function useUpdateNote(topicID: string) {
 	const queryClietn = useQueryClient()
 
 	const {
@@ -17,7 +17,7 @@ export function useUpdateNote() {
 			noteService.updateNote(id, data),
 		onSuccess() {
 			void queryClietn.invalidateQueries({
-				queryKey: ['notes']
+				queryKey: ['notes', topicID]
 			})
 		}
 	})

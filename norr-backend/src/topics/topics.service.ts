@@ -18,7 +18,10 @@ export class TopicsService {
 
 	async getAll(userId: string) {
 		return this.prisma.topic.findMany({
-			where: { userId }
+			where: { userId },
+			orderBy: {
+				createdAt: 'asc'
+			}
 		})
 	}
 

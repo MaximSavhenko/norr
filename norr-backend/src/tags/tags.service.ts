@@ -9,7 +9,10 @@ export class TagsService {
 
 	async getAll(userId: string) {
 		return this.prisma.tag.findMany({
-			where: { userId }
+			where: { userId },
+			orderBy: {
+				createdAt: 'asc'
+			}
 		})
 	}
 
