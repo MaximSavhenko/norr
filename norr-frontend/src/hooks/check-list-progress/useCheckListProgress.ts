@@ -7,5 +7,5 @@ export function useCheckListProgress(topicId: string) {
 		queryKey: ['check-lists', topicId],
 		queryFn: () => checkListProgressService.getCheckListProgress(topicId)
 	})
-	return { checkLists: data, isLoading, error }
+	return { checkLists: data?.data ?? [], isLoading, error }
 }

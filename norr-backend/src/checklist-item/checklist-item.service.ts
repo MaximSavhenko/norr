@@ -6,10 +6,13 @@ import { PrismaService } from 'src/prisma.service'
 @Injectable()
 export class ChecklistItemService {
 	constructor(private prisma: PrismaService) {}
-  
+
 	async getAll(topicId: string, userId: string) {
 		return this.prisma.checklistItem.findMany({
-			where: { topic: { id: topicId, userId } }
+			where: { topic: { id: topicId, userId } },
+			orderBy: {
+				createdAt: 'asc'
+			}
 		})
 	}
 

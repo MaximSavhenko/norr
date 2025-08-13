@@ -8,6 +8,7 @@ export function useTopics() {
     const {data, isLoading , error} = useQuery<{data: ITopicResponse[]}>({
       queryKey: ['topics'],
       queryFn: () => topicService.getTopics(),
+      staleTime: 1000 * 60 * 5, 
     })
 
     return {

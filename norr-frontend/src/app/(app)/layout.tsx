@@ -2,11 +2,9 @@ import type { Metadata } from 'next'
 
 import { Header } from '@/components/header/Header'
 import { Home } from '@/components/home/Home'
-import { LogoutButton } from '@/components/topbar/LogoutButton'
-
-import '../globals.css'
 import { CreateTopicModal } from '@/components/modals/CreateTopicModal'
 import { UpdateTopicModal } from '@/components/modals/UpdateTopicModal'
+import '../globals.css'
 
 export const metadata: Metadata = {
 	title: 'Norr',

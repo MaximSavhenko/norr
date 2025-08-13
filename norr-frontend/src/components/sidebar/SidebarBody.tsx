@@ -53,50 +53,28 @@ export function SidebarBody({
 								key={t.id}
 								className='mb-5'
 							>
-								<div
-									role='button'
-									tabIndex={0}
-									onClick={() => onSelect(t.id)}
-									className={clsx(
-										'group w-full rounded-md px-2 py-2 text-left text-sm transition-colors h-[72px]',
-										isActive
-											? 'bg-primary/10 text-primary'
-											: 'text-foreground/80 hover:bg-accent hover:text-foreground'
-									)}
-								>
-									{/* name */}
-									{!collapsed ? (
-										<div className='flex flex-col justify-between h-full'>
-											<Link href={`/topics/${t.id}`}>
+								<Link href={`/topics/${t.id}`}>
+									<div
+										role='button'
+										tabIndex={0}
+										onClick={() => onSelect(t.id)}
+										className={clsx(
+											'group w-full rounded-md px-2 py-2 text-left text-sm transition-colors ',
+											isActive
+												? 'bg-primary/10 text-primary'
+												: 'text-foreground/80 hover:bg-accent hover:text-foreground'
+										)}
+									>
+										{/* name */}
+										{!collapsed ? (
+											<div className='flex flex-col justify-between h-full'>
 												<p className='truncate'>{t.title}</p>
-												{isActive && typeof progress === 'number' && (
-													<Progress
-														value={progress}
-														className='mt-1'
-													/>
-												)}
-											</Link>
-											<div className='flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity'>
-												<button
-													onClick={() => openEditTopic(t)}
-													className='p-1 hover:text-primary'
-												>
-													<Edit size={16} />
-												</button>
-												<DeleteTopicAlert topicId={t.id} />
 											</div>
-										</div>
-									) : (
-										<span>
-											<Link
-												className='flex items-center justify-center h-full w-full  truncate'
-												href={`/topics/${t.id}`}
-											>
-												{t.title[0]}
-											</Link>
-										</span>
-									)}
-								</div>
+										) : (
+											<span>{t.title[0]}</span>
+										)}
+									</div>
+								</Link>
 							</li>
 						)
 					})}

@@ -12,7 +12,10 @@ export function useUpdateCheckListProgress(topicId: string) {
 			checkListProgressService.updateCheckListProgress(topicId, data, id),
 		onSuccess() {
 			void queryClient.invalidateQueries({
-				queryKey: ['check-lists', topicId]
+				queryKey: ['check-lists', topicId],
+			}),
+			void queryClient.invalidateQueries({
+				queryKey: ['topic-progress', topicId]
 			})
 		}
 	})

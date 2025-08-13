@@ -4,12 +4,10 @@ import { Plus, X } from 'lucide-react'
 import { useState } from 'react'
 
 import { useCreateNote } from '@/hooks/notes/useCreateNote'
-import { useTag } from '@/hooks/tags/useTag'
 
 import { AddedTags } from '../tags/AddedTags'
 import { TagCreate } from '../tags/TagCreate'
 import { TiptapEditor } from '../tiptap-editor/TiptapEditor'
-import { Badge } from '../ui/badge'
 import { Button } from '../ui/button'
 import {
 	Drawer,
@@ -29,12 +27,10 @@ interface INoteCreate {
 
 export function NoteCreate({ topicId }: INoteCreate) {
 	const { createNote, isPending } = useCreateNote()
-	const { tags } = useTag()
 
 	const [open, setOpen] = useState(false)
 	const [selectedTags, setSelectedTags] = useState<string[]>([])
 	const [manageOpen , setManageOpen] = useState(false)
-	console.log(selectedTags)
 
 	return (
 		<Drawer

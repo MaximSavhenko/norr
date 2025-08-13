@@ -58,7 +58,7 @@ export function Sidebar({
 	return (
 		<>
 			{/* Desktop */}
-			<div className='hidden md:block'>{content}</div>
+			<div className='hidden md:block h-full'>{content}</div>
 
 			{/* Mobile trigger */}
 			<button
@@ -79,23 +79,5 @@ export function Sidebar({
 				</div>
 			)}
 		</>
-	)
-}
-
-/* --- tiny Progress component (shadcn-like, но простой) --- */
-function Progress({
-	value = 0,
-	className
-}: {
-	value?: number
-	className?: string
-}) {
-	return (
-		<div className={clsx('h-1.5 w-full rounded-full bg-muted', className)}>
-			<div
-				className='h-full rounded-full bg-primary transition-[width]'
-				style={{ width: `${value}%` }}
-			/>
-		</div>
 	)
 }

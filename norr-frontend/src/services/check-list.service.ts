@@ -3,7 +3,7 @@ import { axiosWithAuth } from '@/api/interceptors'
 import { ICheckListProgressResponse, TypeCheckListProgressFormState } from '@/types/check-list.type'
 
 export class CheckListProgressService {
-	private BASE_URL = '/user/topics/'
+	private BASE_URL = '/user/topics'
 	async getCheckListProgress(topicId: string) {
 		const response = await axiosWithAuth.get<ICheckListProgressResponse[]>(`${this.BASE_URL}/${topicId}/checklist-item`)
 		return response
