@@ -47,6 +47,17 @@ export class TopicsService {
 	}
 
 	async delete(topicId: string, userId: string) {
+		// Удаляем связанные чеклисты
+		await this.prisma.checklistItem.deleteMany({
+			where: { topicId }
+		})
+
+		// Удаляем связанные ноты
+		await this.prisma.note.deleteMany({
+			where: { topicId }
+		})
+
+		// Удаляем сам топик
 		return this.prisma.topic.delete({
 			where: { id: topicId, userId }
 		})

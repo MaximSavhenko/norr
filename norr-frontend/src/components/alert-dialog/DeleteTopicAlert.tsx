@@ -1,5 +1,3 @@
-import { Trash } from 'lucide-react'
-
 import { useDeleteTopic } from '@/hooks/topics/useDeleteTopic'
 
 import {
@@ -10,20 +8,29 @@ import {
 	AlertDialogDescription,
 	AlertDialogFooter,
 	AlertDialogHeader,
-	AlertDialogTitle,
-	AlertDialogTrigger
+	AlertDialogTitle
 } from '../ui/alert-dialog'
+import { useRouter } from 'next/navigation'
 
-export function DeleteTopicAlert({ topicId }: { topicId: string }) {
+interface IDeleteTopicAlert {
+	topicId: string
+	isOpen: boolean
+	setOpen: (open: boolean) => void
+}
+
+export function DeleteTopicAlert({
+	topicId,
+	isOpen,
+	setOpen
+}: IDeleteTopicAlert) {
+	const {push} = useRouter()
 	const { deleteTopic } = useDeleteTopic()
 	const handleDelete = () => {
 		deleteTopic(topicId)
+		push('/')
 	}
 	return (
-		<AlertDialog>
-			<AlertDialogTrigger>
-				<Trash size={16} />
-			</AlertDialogTrigger>
+		<AlertDialog open={isOpen} onOpenChange={setOpen}>
 			<AlertDialogContent>
 				<AlertDialogHeader>
 					<AlertDialogTitle>Delete topic?</AlertDialogTitle>

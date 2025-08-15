@@ -1,13 +1,10 @@
 import clsx from 'clsx'
-import { Edit, Loader2, Trash } from 'lucide-react'
+import { Loader2 } from 'lucide-react'
 import Link from 'next/link'
 
 import { useModalStore } from '@/store/modal.store'
 
 import { useTopicProgres } from '@/hooks/topics/useTopicProgres'
-
-import { DeleteTopicAlert } from '../alert-dialog/DeleteTopicAlert'
-import { Progress } from '../ui/progress'
 
 import { SidebarProps } from './SideBar'
 

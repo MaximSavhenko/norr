@@ -21,7 +21,7 @@ class TopicsService {
 	}
 
 	async updateTopic(id: string, data: TypeTopicFormState) {
-		const response = await axiosWithAuth.put(`${this.BASE_URL}/${id}`, data)
+		const response = await axiosWithAuth.put<ITopicResponse>(`${this.BASE_URL}/${id}`, data)
 		return response
 	}
 

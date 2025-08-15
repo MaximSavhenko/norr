@@ -24,6 +24,7 @@ import { Badge } from '../ui/badge'
 import { NoteContent } from './NoteContent'
 import { NoteMenuBar } from './NoteMenuBar'
 import { formatDate } from '@/lib/formatDate'
+import { NoteStub } from './NoteStub'
 
 interface INotePage {
 	id: string
@@ -59,7 +60,7 @@ export function NoteCard({ id }: INotePage) {
 		<div>
 			<ul>
 				{isLoading && <p>Loading...</p>}
-				{!isLoading && topicNotes.length === 0 && <p>No notes found</p>}
+				{!isLoading && topicNotes.length === 0 && <NoteStub/>}
 				{!isLoading &&
 					topicNotes.map(note => {
 						const isEditing = note.id === editingNoteId

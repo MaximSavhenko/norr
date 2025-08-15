@@ -4,7 +4,7 @@ import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { toast } from 'sonner'
 
-import { ITopicResponse, TypeTopicFormState } from '@/types/topic.type'
+import { ITopicResponse } from '@/types/topic.type'
 
 import { useModalStore } from '@/store/modal.store'
 

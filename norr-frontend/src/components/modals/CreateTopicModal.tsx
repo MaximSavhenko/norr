@@ -3,7 +3,6 @@
 import { useForm } from 'react-hook-form'
 import { toast } from 'sonner'
 
-import { IDialog } from '@/types/dialog.type'
 import { TypeTopicFormState } from '@/types/topic.type'
 
 import { useModalStore } from '@/store/modal.store'

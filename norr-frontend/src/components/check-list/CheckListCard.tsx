@@ -12,6 +12,7 @@ import {
 	CardTitle
 } from '@/components/ui/card'
 
+import { useModalStore } from '@/store/modal.store'
 import { useTopicStore } from '@/store/topics.store'
 
 import { useCheckListProgress } from '@/hooks/check-list-progress/useCheckListProgress'
@@ -20,9 +21,12 @@ import { useDeleteCheckListProgress } from '@/hooks/check-list-progress/useDelet
 import { useUpdateCheckListProgress } from '@/hooks/check-list-progress/useUpdateCheckListProgress'
 import { useTopicProgres } from '@/hooks/topics/useTopicProgres'
 
+import { DeleteTopicAlert } from '../alert-dialog/DeleteTopicAlert'
+import { EntityMenu } from '../dropdown-menu/EntityMenu'
 import { Button } from '../ui/button'
 
 import { CheckList } from './CheckList'
+import { CheckListActionBar } from './CheckListActionBar'
 import { cn } from '@/lib/utils'
 
 interface ICheckList {
@@ -40,11 +44,11 @@ export function CheckListCard({ className, topicId }: ICheckList) {
 
 	const [newLabel, setNewLabel] = useState('')
 
+	const [isOpenDeleteTopic, setOpenDeleteTopic] = useState(false)
+
+	const { openEditTopic } = useModalStore()
+
 	const topic = getTopicById(topicId)
-	console.log(topic);
-	
-
-
 
 	return (
 		<Card className={cn('', className)}>
@@ -57,27 +61,26 @@ export function CheckListCard({ className, topicId }: ICheckList) {
 				</CardTitle>
 				<CardDescription>{topic?.description}</CardDescription>
 				<CardAction>
-					<Button variant='outline'>+ Add check item</Button>
-				</CardAction>
-				<div className='mt-2 flex gap-2'>
-					<input
-						value={newLabel}
-						onChange={e => setNewLabel(e.target.value)}
-						className='px-2 py-1 text-sm bg-background border border-input rounded-sm'
-						placeholder='New item'
-					/>
-					<Button
-						onClick={() => {
-							if (newLabel.trim()) {
-								createCheckListItem({ content: newLabel })
-								setNewLabel('')
-							}
+					<EntityMenu
+						label='Settings topic'
+						onDelete={() => {
+							setOpenDeleteTopic(true)
 						}}
-						variant='default'
-					>
-						Add
-					</Button>
-				</div>
+						onEdit={() => {
+							if (topic) openEditTopic(topic)
+						}}
+					/>
+					<DeleteTopicAlert
+						topicId={topicId}
+						isOpen={isOpenDeleteTopic}
+						setOpen={setOpenDeleteTopic}
+					/>
+				</CardAction>
+				<CheckListActionBar
+					newLabel={newLabel}
+					setNewLabel={setNewLabel}
+					createCheckListItem={createCheckListItem}
+				/>
 			</CardHeader>
 			<CardContent>
 				{checkLists.map(label => (
