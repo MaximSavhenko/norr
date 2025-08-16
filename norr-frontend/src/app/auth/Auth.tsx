@@ -2,6 +2,7 @@
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useMutation } from '@tanstack/react-query'
+import { AxiosError } from 'axios'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
@@ -35,14 +36,16 @@ export function Auth() {
 		mutationFn: ({ isLogin, data }: { isLogin: boolean; data: IAuthForm }) =>
 			authService.main(isLogin ? 'login' : 'register', data),
 		onSuccess(_, variables) {
-			variables.isLogin
-				? toast.success('Successfully logged in!')
-				: toast.success('Successfully registered!')
+			if (variables.isLogin) {
+				toast.success('Successfully logged in!')
+			} else {
+				toast.success('Successfully registered!')
+			}
 			reset()
 			push('/')
 		},
-		onError(error: any) {
-			toast.error(error.response?.data?.message || 'Something wen wrong')
+		onError(error: AxiosError<{ message?: string }>) {
+			toast.error(error.response?.data?.message || 'Something went wrong')
 		}
 	})
 

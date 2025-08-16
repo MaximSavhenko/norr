@@ -1,8 +1,6 @@
 import { Trash } from 'lucide-react'
 import { toast } from 'sonner'
 
-import { ITagUpdate } from '@/types/tag.type'
-
 import { useDeleteTag } from '@/hooks/tags/useDeleteTag'
 import { useUpdateTag } from '@/hooks/tags/useUpdateTag'
 

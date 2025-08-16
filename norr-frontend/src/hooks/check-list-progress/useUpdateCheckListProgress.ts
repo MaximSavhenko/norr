@@ -8,12 +8,17 @@ export function useUpdateCheckListProgress(topicId: string) {
 	const queryClient = useQueryClient()
 	const { mutate: updateCheckListItem } = useMutation({
 		mutationKey: ['update check-list'],
-		mutationFn: ({data,id}:{data: TypeCheckListProgressFormState , id: string}) =>
-			checkListProgressService.updateCheckListProgress(topicId, data, id),
+		mutationFn: ({
+			data,
+			id
+		}: {
+			data: TypeCheckListProgressFormState
+			id: string
+		}) => checkListProgressService.updateCheckListProgress(topicId, data, id),
 		onSuccess() {
 			queryClient.invalidateQueries({
-				queryKey: ['check-lists', topicId],
-			}),
+				queryKey: ['check-lists', topicId]
+			})
 			queryClient.invalidateQueries({
 				queryKey: ['topic-progress', topicId]
 			})

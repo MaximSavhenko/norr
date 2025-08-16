@@ -1,12 +1,20 @@
-export const errorCatch = (error: any): string => {
-	const message = error?.response?.data.message
+export const errorCatch = (error: unknown): string => {
+  if (error instanceof Error) {
+    const axiosLikeError = error as {
+      response?: { data?: { message?: string | string[] } };
+    };
 
-	if (message) {
-		if (typeof message === 'object') {
-			return message[0] || 'Unknown error'
-		}
-		return message
-	}
+    const message = axiosLikeError?.response?.data?.message;
 
-	return error.message || 'Unknown error'
-}
+    if (message) {
+      if (Array.isArray(message)) {
+        return message[0] || "Unknown error";
+      }
+      return message;
+    }
+
+    return error.message || "Unknown error";
+  }
+
+  return "Unknown error";
+};
