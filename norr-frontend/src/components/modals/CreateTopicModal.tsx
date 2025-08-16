@@ -27,7 +27,9 @@ export function CreateTopicModal() {
 	const onSubmit = (data: TypeTopicFormState) => {
 		createTopic(data, {
 			onSuccess() {
-				;(reset(), closeCreateTopic(), toast.success('Add new topic!'))
+				reset()
+				closeCreateTopic()
+				toast.success('Add new topic!')
 			}
 		})
 	}

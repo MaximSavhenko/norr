@@ -1,7 +1,4 @@
-import { Trash } from 'lucide-react'
-
 import { useDeleteNote } from '@/hooks/notes/useDeleteNote'
-import { useDeleteTopic } from '@/hooks/topics/useDeleteTopic'
 
 import {
 	AlertDialog,
@@ -12,7 +9,6 @@ import {
 	AlertDialogFooter,
 	AlertDialogHeader,
 	AlertDialogTitle,
-	AlertDialogTrigger
 } from '../ui/alert-dialog'
 
 interface IDeleteNoteAlert {
@@ -41,7 +37,9 @@ export function DeleteNoteAlert({ noteId, open, close }: IDeleteNoteAlert) {
 					</AlertDialogDescription>
 				</AlertDialogHeader>
 				<AlertDialogFooter>
-					<AlertDialogCancel onClick={() => close(false)}>Cancel</AlertDialogCancel>
+					<AlertDialogCancel onClick={() => close(false)}>
+						Cancel
+					</AlertDialogCancel>
 					<AlertDialogAction onClick={handleDelete}>Delete</AlertDialogAction>
 				</AlertDialogFooter>
 			</AlertDialogContent>

@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 
-import { ITopicResponse, TypeTopicFormState } from '@/types/topic.type'
+import { ITopicResponse } from '@/types/topic.type'
 
 import { topicService } from '@/services/topics.service'
 import { useTopicStore } from '@/store/topics.store'

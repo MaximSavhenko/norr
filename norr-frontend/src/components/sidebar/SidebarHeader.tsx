@@ -15,7 +15,6 @@ interface ISideBarHeader extends Pick<SidebarProps, 'onAddTopic'> {
 
 export function SidebarHeader({
 	collapsed,
-	onAddTopic,
 	setCollapsed
 }: ISideBarHeader) {
 	const { openCreateTopic } = useModalStore()

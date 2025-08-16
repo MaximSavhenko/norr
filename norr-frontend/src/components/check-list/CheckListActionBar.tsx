@@ -1,9 +1,10 @@
+import { TypeCheckListProgressFormState } from '@/types/check-list.type'
 import { Button } from '../ui/button'
 
 interface ICheckListActionBar {
 	newLabel: string
 	setNewLabel: (value: string) => void
-	createCheckListItem: (content: any) => void
+	createCheckListItem: (content: TypeCheckListProgressFormState) => void
 }
 
 export function CheckListActionBar({

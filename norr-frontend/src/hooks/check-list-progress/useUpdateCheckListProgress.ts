@@ -11,10 +11,10 @@ export function useUpdateCheckListProgress(topicId: string) {
 		mutationFn: ({data,id}:{data: TypeCheckListProgressFormState , id: string}) =>
 			checkListProgressService.updateCheckListProgress(topicId, data, id),
 		onSuccess() {
-			void queryClient.invalidateQueries({
+			queryClient.invalidateQueries({
 				queryKey: ['check-lists', topicId],
 			}),
-			void queryClient.invalidateQueries({
+			queryClient.invalidateQueries({
 				queryKey: ['topic-progress', topicId]
 			})
 		}

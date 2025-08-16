@@ -20,7 +20,7 @@ export function AddedTags({
 	setSelectedIds,
   className
 }: AddedTagsProps) {
-  const {tags, isLoading} = useTags()
+  const {tags} = useTags()
 	return (
 		<div className={cn('flex flex-wrap gap-2 mt-2', className)}>
 			{selectedIds.map(id => {

@@ -1,6 +1,6 @@
 'use client'
 
-import { Plus, X } from 'lucide-react'
+import { Plus } from 'lucide-react'
 import { useState } from 'react'
 
 import { useCreateNote } from '@/hooks/notes/useCreateNote'
@@ -26,7 +26,7 @@ interface INoteCreate {
 }
 
 export function NoteCreate({ topicId }: INoteCreate) {
-	const { createNote, isPending } = useCreateNote()
+	const { createNote } = useCreateNote()
 
 	const [open, setOpen] = useState(false)
 	const [selectedTags, setSelectedTags] = useState<string[]>([])

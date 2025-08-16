@@ -23,7 +23,7 @@ export function Home() {
 		if (!isSame) {
 			setTopics(items)
 		}
-	}, [items])
+	}, [items,setTopics])
 	return (
 		<div>
 			<HomeLayout />

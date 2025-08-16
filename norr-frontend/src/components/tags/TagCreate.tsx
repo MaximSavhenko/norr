@@ -18,7 +18,7 @@ export function TagCreate({ selectedIds, onToggle }: ITagCreate) {
 	/* local state для выбора */
 	const [query, setQuery] = useState('')
 
-	const { tags, isLoading, error } = useTag()
+	const { tags } = useTag()
 	const { createTag } = useCreateTag()
 
 	return (

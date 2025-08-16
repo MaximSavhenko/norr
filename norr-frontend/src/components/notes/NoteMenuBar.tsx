@@ -1,4 +1,3 @@
-import { useDeleteNote } from '@/hooks/notes/useDeleteNote'
 import {
 	DropdownMenu,
 	DropdownMenuContent,

@@ -23,7 +23,6 @@ import { useTopicProgres } from '@/hooks/topics/useTopicProgres'
 
 import { DeleteTopicAlert } from '../alert-dialog/DeleteTopicAlert'
 import { EntityMenu } from '../dropdown-menu/EntityMenu'
-import { Button } from '../ui/button'
 
 import { CheckList } from './CheckList'
 import { CheckListActionBar } from './CheckListActionBar'

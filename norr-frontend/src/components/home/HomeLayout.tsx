@@ -5,7 +5,7 @@ import { useTopics } from '@/hooks/topics/useTopic'
 import { Sidebar } from '../sidebar/SideBar'
 
 export function HomeLayout() {
-	const { items: topics, isLoading, error } = useTopics()
+	const { items: topics } = useTopics()
 	const [activeTopicId, setActiveTopicId] = useState<string | undefined>()
 
 	return (

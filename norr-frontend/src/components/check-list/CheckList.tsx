@@ -4,6 +4,7 @@ import { Pencil, Trash } from 'lucide-react'
 import { Button } from '../ui/button'
 import { Checkbox } from '../ui/checkbox'
 import { Label } from '../ui/label'
+import { cn } from '@/lib/utils'
 
 
 interface ICheckList {
@@ -24,7 +25,7 @@ export function CheckList({
 	onEdit
 }: ICheckList) {
 	return (
-		<div className='flex items-center justify-between gap-2'>
+		<div className={cn('flex items-center justify-between gap-2',className)}>
 			<div className='flex items-center gap-2'>
 				<Label>
 					<Checkbox

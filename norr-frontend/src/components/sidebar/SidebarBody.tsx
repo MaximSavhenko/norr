@@ -2,10 +2,6 @@ import clsx from 'clsx'
 import { Loader2 } from 'lucide-react'
 import Link from 'next/link'
 
-import { useModalStore } from '@/store/modal.store'
-
-import { useTopicProgres } from '@/hooks/topics/useTopicProgres'
-
 import { SidebarProps } from './SideBar'
 
 interface ISidebarBody
@@ -23,9 +19,6 @@ export function SidebarBody({
 	onSelect,
 	collapsed
 }: ISidebarBody) {
-	const { progress, isLoading, error } = useTopicProgres(activeTopicId)
-	const { openEditTopic } = useModalStore()
-
 	return (
 		<div className='flex-1 overflow-y-auto px-2 pb-2'>
 			{loading ? (
