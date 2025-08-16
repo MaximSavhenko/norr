@@ -68,7 +68,7 @@ export class AuthServise {
 			expires: expiresIn,
 			secure: true,
 			// lax if prod
-			sameSite: 'none'
+			sameSite: 'lax'
 		})
 	}
 	async removeRefreshTokenFromResponse(res: Response) {
@@ -78,7 +78,7 @@ export class AuthServise {
 			expires: new Date(0),
 			secure: true,
 			//lax if prod
-			sameSite: 'none'
+			sameSite: 'lax'
 		})
 	}
 
