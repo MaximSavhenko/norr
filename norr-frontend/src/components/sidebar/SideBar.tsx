@@ -4,10 +4,11 @@ import clsx from 'clsx'
 import { Menu } from 'lucide-react'
 import { useState } from 'react'
 
-import { SidebarBody } from './SidebarBody'
-import { SidebarHeader } from './SidebarHeader'
 import { ITopicResponse } from '@/types/topic.type'
 
+import { SidebarBody } from './SidebarBody'
+import { SidebarHeader } from './SidebarHeader'
+import { cn } from '@/lib/utils'
 
 export interface SidebarProps {
 	topics: ITopicResponse[]
@@ -32,9 +33,8 @@ export function Sidebar({
 	const content = (
 		<aside
 			className={clsx(
-				'flex h-full flex-col border-r border-border bg-background',
+				'flex h-full flex-col border-r border-border bg-background fixed z-6',
 				collapsed ? 'w-16' : 'w-64',
-				'transition-[width] duration-200',
 				className
 			)}
 		>
@@ -58,7 +58,15 @@ export function Sidebar({
 	return (
 		<>
 			{/* Desktop */}
-			<div className='hidden md:block h-full'>{content}</div>
+			<div
+				className={cn(
+					'hidden md:block h-full',
+					'transition-[width] duration-200',
+					collapsed ? 'w-16' : 'w-64'
+				)}
+			>
+				{content}
+			</div>
 
 			{/* Mobile trigger */}
 			<button
