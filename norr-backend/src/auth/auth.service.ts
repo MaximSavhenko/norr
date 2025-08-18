@@ -62,22 +62,26 @@ export class AuthServise {
 		const expiresIn = new Date()
 		expiresIn.setDate(expiresIn.getDate() + this.EXPIRE_DAY_REFRESH_TOKEN)
 
+		const isProd = process.env.NODE_ENV === 'production'
+
 		res.cookie(this.REFRESH_TOKEN_NAME, refreshToken, {
 			httpOnly: true,
-			domain: process.env.COOKIE_DOMAIN || undefined, // ⬅️ гибко
 			expires: expiresIn,
-			secure: process.env.NODE_ENV === 'production', // только https
-			sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax'
+			secure: isProd, // только https в проде
+			sameSite: isProd ? 'none' : 'lax', // для кросс-доменной работы на проде
+			domain: isProd ? undefined : undefined // убрали костыль с COOKIE_DOMAIN
 		})
 	}
 
 	async removeRefreshTokenFromResponse(res: Response) {
+		const isProd = process.env.NODE_ENV === 'production'
+
 		res.cookie(this.REFRESH_TOKEN_NAME, '', {
 			httpOnly: true,
-			domain: process.env.COOKIE_DOMAIN || undefined,
 			expires: new Date(0),
-			secure: process.env.NODE_ENV === 'production',
-			sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax'
+			secure: isProd,
+			sameSite: isProd ? 'none' : 'lax',
+			domain: isProd ? undefined : undefined
 		})
 	}
 
