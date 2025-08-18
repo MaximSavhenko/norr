@@ -64,21 +64,20 @@ export class AuthServise {
 
 		res.cookie(this.REFRESH_TOKEN_NAME, refreshToken, {
 			httpOnly: true,
-			domain: 'localhost',
+			domain: process.env.COOKIE_DOMAIN || undefined, // ⬅️ гибко
 			expires: expiresIn,
-			secure: true,
-			// lax if prod
-			sameSite: 'lax'
+			secure: process.env.NODE_ENV === 'production', // только https
+			sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax'
 		})
 	}
+
 	async removeRefreshTokenFromResponse(res: Response) {
 		res.cookie(this.REFRESH_TOKEN_NAME, '', {
 			httpOnly: true,
-			domain: 'localhost',
+			domain: process.env.COOKIE_DOMAIN || undefined,
 			expires: new Date(0),
-			secure: true,
-			//lax if prod
-			sameSite: 'lax'
+			secure: process.env.NODE_ENV === 'production',
+			sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax'
 		})
 	}
 
